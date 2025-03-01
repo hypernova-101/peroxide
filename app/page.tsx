@@ -1,6 +1,17 @@
-export default function Home() {
+"use client";
+import React from 'react'
+
+export default function Page() {
+  
+  const listTodos = async () => {
+
+  }
+  
   return (
-    <div className="">
-    </div>
-  );
+    <>
+    <button onClick={listTodos}>
+      Get
+    </button>
+    </>
+  )
 }
