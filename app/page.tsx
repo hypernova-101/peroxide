@@ -15,10 +15,7 @@ export default function Page() {
   }
   
   return (
-    <>
-    <button onClick={listTodos}>
-      Get AD
-    </button>
+    <>  
     </>
   )
 }

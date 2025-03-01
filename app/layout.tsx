@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Fab } from "@/components/custom/fab";
 
 export const metadata: Metadata = {
   title: "peroxide",
@@ -13,8 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="flex min-h-screen w-full">
         {children}
+        <Fab/>
       </body>
     </html>
   );
