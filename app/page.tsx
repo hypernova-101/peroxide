@@ -1,16 +1,23 @@
 "use client";
+import { firestore } from '@/db';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import React from 'react'
 
 export default function Page() {
   
   const listTodos = async () => {
-
+    const ref = collection(firestore, `users/email/todos/`)
+    await addDoc(ref, {
+      task: 'sunday running',
+      status: 'incomplete',
+      createdAt: Date.now()
+    })
   }
   
   return (
     <>
     <button onClick={listTodos}>
-      Get
+      Get AD
     </button>
     </>
   )
