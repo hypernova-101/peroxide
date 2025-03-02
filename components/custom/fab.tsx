@@ -1,10 +1,45 @@
+'use client'
+
+import React from "react";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { GlareCard } from "../ui/glare-card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Input } from "../ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Loader } from "lucide-react";
+import { addDoc, collection, CollectionReference } from "firebase/firestore";
+import { firestore } from "@/db";
+import { addSocialChannels } from "@/db/socials";
+import { Response } from "@/lib/modals";
+import { toast } from "sonner";
+
+const socials = ["youtube", "facebook", "instagram", "snapchat"]
 
 export function Fab() {
+
+    const [social, setSocial] = React.useState(socials[0])
+    const [socialName, setSocialName] = React.useState("")
+    const [loading, setLoading] = React.useState(false)
+
+    const click = async () => {
+        setLoading(true)
+
+       const res = await addSocialChannels({ 
+        name: socialName, 
+        platform: social,
+       })
+
+       if(res == Response.SUCCESS) {
+        toast(`Created ${socialName}`, {
+            description: `Platform ${social}`
+        })
+       } else [
+        toast(`Failed to create account`)
+       ]
+
+        setLoading(false)
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -24,10 +59,25 @@ export function Fab() {
                     <TabsContent value="socials" className="flex flex-1 flex-col p-4 gap-y-8">
                         <div className="flex flex-col gap-y-4">    
                             <h1 className="text-lg font-extrabold">New Social Media</h1>
-                            <Input className="w-full" placeholder="Enter a account name"/>
+                            <Input className="w-full p-4" placeholder="Enter a account name" value={socialName} onChange={(e) => setSocialName(e.target.value)}/>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger className="border p-4">
+
+                                    {social}
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    { socials.map((item, key) => {
+                                        return(
+                                            <DropdownMenuItem key={key} onClick={() => setSocial(item)}>
+                                                { item }
+                                            </DropdownMenuItem>
+                                        )
+                                    })}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
-                        <Button>
-                            Save   
+                        <Button onClick={click} disabled={loading}>
+                            { loading ? <Loader className="animate-spin"/> : <p>Save</p>}
                         </Button>
                     </TabsContent>
                     <TabsContent value="todos" className="flex flex-1">

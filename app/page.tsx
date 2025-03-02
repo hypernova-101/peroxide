@@ -1,6 +1,6 @@
 "use client";
 import { firestore } from '@/db';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection  } from 'firebase/firestore';
 import React from 'react'
 
 export default function Page() {
