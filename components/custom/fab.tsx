@@ -7,8 +7,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from "../ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Loader } from "lucide-react";
-import { addDoc, collection, CollectionReference } from "firebase/firestore";
-import { firestore } from "@/db";
 import { addSocialChannels } from "@/db/socials";
 import { Response } from "@/lib/modals";
 import { toast } from "sonner";
