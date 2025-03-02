@@ -31,9 +31,9 @@ export function Fab() {
         toast(`Created ${socialName}`, {
             description: `Platform ${social}`
         })
-       } else [
+       } else {
         toast(`Failed to create account`)
-       ]
+    }
 
         setLoading(false)
     }
